@@ -4,22 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4bbe2751-5cb1-4646-8d29-e6c0ed57965c" name="Changes" comment="Project skeleton - part 2">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/config/ElasticsearchConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/controllers/SportFieldController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/exceptions/ResourceNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/model/Address.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/model/SportField.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/repositories/SportFieldRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/services/CrudService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/services/SportFieldService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/services/implementations/SportFieldServiceImpl.java" afterDir="false" />
+    <list default="true" id="4bbe2751-5cb1-4646-8d29-e6c0ed57965c" name="Changes" comment="Added sport field endpoint, added spring doc">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/api/dtos/AddressDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/api/dtos/SportFieldDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/api/mapper/AddressMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/api/mapper/SportFieldMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/config/SecurityConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nacu/sport/SportApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/SportApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nacu/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nacu/sport/controllers/SportFieldController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/controllers/SportFieldController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nacu/sport/model/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/model/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nacu/sport/model/SportField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/model/SportField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nacu/sport/services/SportFieldService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/services/SportFieldService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nacu/sport/services/implementations/SportFieldServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nacu/sport/services/implementations/SportFieldServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +26,12 @@
   </component>
   <component name="ChangesViewManager">
     <option name="groupingKeys">
+      <option value="directory" />
       <option value="module" />
     </option>
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -58,6 +60,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="excludeTargetFolder" value="false" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="2PQBBMoPbOKxuXe65mJUdWV2nKU" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -67,18 +76,18 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.SportApplication">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.nacu.Main" />
@@ -117,6 +126,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.SportApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.SportApplication" />
@@ -147,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683380065906</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added sport field endpoint, added spring doc">
+      <created>1683409993470</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683409993470</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -164,6 +184,18 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Project skeleton" />
     <MESSAGE value="Project skeleton - part 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Project skeleton - part 2" />
+    <MESSAGE value="Added sport field endpoint, added spring doc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added sport field endpoint, added spring doc" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/nacu/sport/services/implementations/SportFieldServiceImpl.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,52 +1,50 @@
 package com.nacu.sport.controllers;
 
-import com.nacu.sport.model.SportField;
+import com.nacu.sport.api.dtos.SportFieldDTO;
 import com.nacu.sport.services.SportFieldService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("api/fields")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class SportFieldController
 {
-    private final SportFieldService service;
-
     @Autowired
-    public SportFieldController(SportFieldService service)
-    {
-        this.service = service;
-    }
+    private SportFieldService service;
 
     @PostMapping(value = "/")
-    public SportField create(@RequestBody SportField sportField)
+    public ResponseEntity<SportFieldDTO> create(@RequestBody @Valid SportFieldDTO sportFieldDTO)
     {
-        return service.create(sportField);
+        return new ResponseEntity<>(service.create(sportFieldDTO), HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{id}")
-    public SportField findById(@PathVariable String id)
+    public ResponseEntity<SportFieldDTO> findById(@PathVariable String id)
     {
-        return service.findById(id);
+        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/")
-    public List<SportField> findAll()
+    public ResponseEntity<List<SportFieldDTO>> findAll()
     {
-        return service.findAll();
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     @PutMapping(value = "/")
-    public SportField update(@RequestBody SportField sportField)
+    public ResponseEntity<SportFieldDTO> update(@RequestBody @Valid SportFieldDTO sportFieldDTO)
     {
-        return service.update(sportField);
+        return new ResponseEntity<>(service.create(sportFieldDTO), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable String id)
+    public ResponseEntity<Void> delete(@PathVariable String id)
     {
         service.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

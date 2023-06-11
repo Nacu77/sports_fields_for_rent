@@ -1,21 +1,18 @@
 package com.nacu.sport.model;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Address
 {
-    @NotBlank
     private String country;
-
-    @NotBlank
     private String city;
-
-    @NotBlank
     private String street;
-
-    @NotNull
     private Integer number;
 }

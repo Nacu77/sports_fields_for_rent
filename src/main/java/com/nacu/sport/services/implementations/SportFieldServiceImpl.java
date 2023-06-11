@@ -1,5 +1,7 @@
 package com.nacu.sport.services.implementations;
 
+import com.nacu.sport.api.dtos.SportFieldDTO;
+import com.nacu.sport.api.mapper.SportFieldMapper;
 import com.nacu.sport.exceptions.ResourceNotFoundException;
 import com.nacu.sport.model.SportField;
 import com.nacu.sport.repositories.SportFieldRepository;
@@ -7,44 +9,47 @@ import com.nacu.sport.services.SportFieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class SportFieldServiceImpl implements SportFieldService
 {
-    private final SportFieldRepository repository;
+    @Autowired
+    private SportFieldRepository repository;
 
     @Autowired
-    public SportFieldServiceImpl(SportFieldRepository repository)
+    private SportFieldMapper mapper;
+
+    @Override
+    public List<SportFieldDTO> findAll()
     {
-        this.repository = repository;
+        return StreamSupport.stream(repository.findAll().spliterator(), true)
+                .map(sportField -> mapper.entityToDto(sportField))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<SportField> findAll()
+    public SportFieldDTO findById(String id)
     {
-        List<SportField> fields = new ArrayList<>();
-        repository.findAll().forEach(fields::add);
-        return fields;
+        return repository.findById(id)
+                .map(sportField -> mapper.entityToDto(sportField))
+                .orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     @Override
-    public SportField findById(String id)
+    public SportFieldDTO create(SportFieldDTO sportFieldDTO)
     {
-        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+        SportField sportField = mapper.dtoToEntity(sportFieldDTO);
+        return mapper.entityToDto(repository.save(sportField));
     }
 
     @Override
-    public SportField create(SportField sportField)
+    public SportFieldDTO update(SportFieldDTO sportFieldDTO)
     {
-        return repository.save(sportField);
-    }
-
-    @Override
-    public SportField update(SportField sportField)
-    {
-        return repository.save(sportField);
+        SportField sportField = mapper.dtoToEntity(sportFieldDTO);
+        return mapper.entityToDto(repository.save(sportField));
     }
 
     @Override
