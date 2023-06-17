@@ -14,19 +14,19 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AddressDTO
 {
-    @NotBlank(message = "Invalid country: Empty country")
-    @NotNull(message = "Invalid country: Country is null")
+    @NotBlank(message = "Empty country")
+    @NotNull(message = "Country is null")
     private String country;
 
-    @NotBlank(message = "Invalid city: Empty city")
-    @NotNull(message = "Invalid city: City is null")
+    @NotBlank(message = "Empty city")
+    @NotNull(message = "City is null")
     private String city;
 
-    @NotBlank(message = "Invalid street: Empty street")
-    @NotNull(message = "Invalid street: Street is null")
+    @NotBlank(message = "Empty street")
+    @NotNull(message = "Street is null")
     private String street;
 
-    @NotNull(message = "Invalid number: Number is null")
-    @Min(value = 1, message = "Invalid number: Number should be greater than 0")
+    @NotNull(message = "Number is null")
+    @Min(value = 1, message = "Number should be greater than 0")
     private Integer number;
 }
