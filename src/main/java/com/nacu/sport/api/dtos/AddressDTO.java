@@ -29,4 +29,7 @@ public class AddressDTO
     @NotNull(message = "Number is null")
     @Min(value = 1, message = "Number should be greater than 0")
     private Integer number;
+
+    private Double latitude;
+    private Double longitude;
 }
