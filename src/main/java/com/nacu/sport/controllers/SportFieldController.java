@@ -38,7 +38,7 @@ public class SportFieldController
     @PutMapping(value = "/")
     public ResponseEntity<SportFieldDTO> update(@RequestBody @Valid SportFieldDTO sportFieldDTO)
     {
-        return new ResponseEntity<>(service.create(sportFieldDTO), HttpStatus.OK);
+        return new ResponseEntity<>(service.update(sportFieldDTO), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

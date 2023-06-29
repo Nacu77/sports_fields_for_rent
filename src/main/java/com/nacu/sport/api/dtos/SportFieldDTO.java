@@ -1,5 +1,6 @@
 package com.nacu.sport.api.dtos;
 
+import com.nacu.sport.api.constraints.ScheduleValidation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -34,4 +35,7 @@ public class SportFieldDTO
     @Min(value = 0, message = "Rating should be greater than 0 and lower than 5")
     @Max(value = 5, message = "Rating should be greater than 0 and lower than 5")
     private Double rating;
+
+    @ScheduleValidation
+    private ScheduleDTO schedule;
 }

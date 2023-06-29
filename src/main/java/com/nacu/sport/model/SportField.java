@@ -22,4 +22,5 @@ public class SportField
     private Double pricePerHour;
     private Address address;
     private Double rating;
+    private Schedule schedule;
 }
