@@ -5,8 +5,6 @@ import com.nacu.sport.model.Address;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface AddressMapper
+public interface AddressMapper extends BaseMapper<AddressDTO, Address>
 {
-    AddressDTO entityToDto(Address address);
-    Address dtoToEntity(AddressDTO addressDTO);
 }

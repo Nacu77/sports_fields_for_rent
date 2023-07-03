@@ -6,8 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring",
         uses = { ScheduleMapper.class, AddressMapper.class })
-public interface SportFieldMapper
+public interface SportFieldMapper extends BaseMapper<SportFieldDTO, SportField>
 {
-    SportFieldDTO entityToDto(SportField sportField);
-    SportField dtoToEntity(SportFieldDTO sportFieldDTO);
 }

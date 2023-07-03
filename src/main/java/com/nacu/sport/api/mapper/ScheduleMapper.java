@@ -5,8 +5,6 @@ import com.nacu.sport.model.Schedule;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface ScheduleMapper
+public interface ScheduleMapper extends BaseMapper<ScheduleDTO, Schedule>
 {
-    ScheduleDTO entityToDto(Schedule schedule);
-    Schedule dtoToEntity(ScheduleDTO scheduleDTO);
 }
