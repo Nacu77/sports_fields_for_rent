@@ -1,5 +1,6 @@
-package com.nacu.sport.api.constraints;
+package com.nacu.sport.api.constraints.validations;
 
+import com.nacu.sport.api.constraints.validators.AppointmentValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -8,16 +9,15 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
 
-@Target( { FIELD, PARAMETER })
+@Target({ TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy = ScheduleValidator.class)
-public @interface ScheduleValidation
+@Constraint(validatedBy = AppointmentValidator.class)
+public @interface AppointmentValidation
 {
-    String message() default "Start times must be before end times";
+    String message() default "Invalid Appointment";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

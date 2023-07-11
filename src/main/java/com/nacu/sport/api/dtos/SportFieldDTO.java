@@ -1,6 +1,6 @@
 package com.nacu.sport.api.dtos;
 
-import com.nacu.sport.api.constraints.ScheduleValidation;
+import com.nacu.sport.api.constraints.validations.ScheduleValidation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

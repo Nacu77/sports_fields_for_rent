@@ -1,5 +1,6 @@
-package com.nacu.sport.api.constraints;
+package com.nacu.sport.api.constraints.validators;
 
+import com.nacu.sport.api.constraints.validations.ScheduleValidation;
 import com.nacu.sport.api.dtos.ScheduleDTO;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

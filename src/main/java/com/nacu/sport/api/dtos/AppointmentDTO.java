@@ -1,6 +1,7 @@
 package com.nacu.sport.api.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.nacu.sport.api.constraints.validations.AppointmentValidation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@AppointmentValidation
 public class AppointmentDTO
 {
     private String id;
