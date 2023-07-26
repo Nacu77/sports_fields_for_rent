@@ -4,6 +4,7 @@ import com.nacu.sport.api.constraints.validations.AppointmentValidation;
 import com.nacu.sport.api.dtos.AppointmentDTO;
 import com.nacu.sport.model.Schedule;
 import com.nacu.sport.model.SportField;
+import com.nacu.sport.repositories.AppointmentRepository;
 import com.nacu.sport.repositories.SportFieldRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -16,6 +17,9 @@ public class AppointmentValidator implements ConstraintValidator<AppointmentVali
 {
     @Autowired
     private SportFieldRepository sportFieldRepository;
+
+    @Autowired
+    private AppointmentRepository appointmentRepository;
 
     @Override
     public boolean isValid(AppointmentDTO appointmentDTO, ConstraintValidatorContext constraintValidatorContext)
@@ -44,41 +48,37 @@ public class AppointmentValidator implements ConstraintValidator<AppointmentVali
         }
 
         // check if the time fits the schedule
+        boolean fitsTheSchedule;
         switch (appointmentDTO.getStartDateTime().getDayOfWeek())
         {
-            case MONDAY ->
-            {
-                return isOnSchedule(startDate, endDate, schedule.getMondayStart(), schedule.getMondayEnd());
-            }
-            case TUESDAY ->
-            {
-                return isOnSchedule(startDate, endDate, schedule.getTuesdayStart(), schedule.getTuesdayEnd());
-            }
-            case WEDNESDAY ->
-            {
-                return isOnSchedule(startDate, endDate, schedule.getWednesdayStart(), schedule.getWednesdayEnd());
-            }
-            case THURSDAY ->
-            {
-                return isOnSchedule(startDate, endDate, schedule.getThursdayStart(), schedule.getThursdayEnd());
-            }
-            case FRIDAY ->
-            {
-                return isOnSchedule(startDate, endDate, schedule.getFridayStart(), schedule.getFridayEnd());
-            }
-            case SATURDAY ->
-            {
-                return isOnSchedule(startDate, endDate, schedule.getSaturdayStart(), schedule.getSaturdayEnd());
-            }
-            case SUNDAY ->
-            {
-                return isOnSchedule(startDate, endDate, schedule.getSundayStart(), schedule.getSundayEnd());
-            }
-            default ->
-            {
-                return false;
-            }
+            case MONDAY -> fitsTheSchedule = isOnSchedule(startDate, endDate, schedule.getMondayStart(), schedule.getMondayEnd());
+            case TUESDAY -> fitsTheSchedule = isOnSchedule(startDate, endDate, schedule.getTuesdayStart(), schedule.getTuesdayEnd());
+            case WEDNESDAY -> fitsTheSchedule = isOnSchedule(startDate, endDate, schedule.getWednesdayStart(), schedule.getWednesdayEnd());
+            case THURSDAY -> fitsTheSchedule = isOnSchedule(startDate, endDate, schedule.getThursdayStart(), schedule.getThursdayEnd());
+            case FRIDAY -> fitsTheSchedule = isOnSchedule(startDate, endDate, schedule.getFridayStart(), schedule.getFridayEnd());
+            case SATURDAY -> fitsTheSchedule = isOnSchedule(startDate, endDate, schedule.getSaturdayStart(), schedule.getSaturdayEnd());
+            case SUNDAY -> fitsTheSchedule = isOnSchedule(startDate, endDate, schedule.getSundayStart(), schedule.getSundayEnd());
+            default -> fitsTheSchedule = false;
         }
+        if (!fitsTheSchedule)
+        {
+            return false;
+        }
+
+        // check if the time overlaps other appointments
+        boolean overlapsOtherAppointment = appointmentRepository
+                .findAllBySportFieldIdAndStartDateTimeGreaterThanEqualAndEndDateTimeLessThanEqual(
+                    appointmentDTO.getSportFieldId(),
+                    startDate.toLocalDate().atStartOfDay(),
+                    endDate.toLocalDate().atTime(LocalTime.MAX)
+                )
+                .stream()
+                .anyMatch(appointment ->
+                        (startDate.isAfter(appointment.getStartDateTime()) && startDate.isBefore(appointment.getEndDateTime())) ||
+                        (endDate.isAfter(appointment.getStartDateTime()) && endDate.isBefore(appointment.getEndDateTime()))
+                );
+
+        return !overlapsOtherAppointment;
     }
 
     private Schedule getSchedule(String sportFieldId)
