@@ -38,4 +38,7 @@ public class SportFieldDTO
 
     @ScheduleValidation
     private ScheduleDTO schedule;
+
+    private String primaryImageName;
+    private ImageDTO primaryImage;
 }

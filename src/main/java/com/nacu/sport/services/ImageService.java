@@ -10,5 +10,6 @@ public interface ImageService
 {
     ImageDTO upload(String sportFieldId, MultipartFile imageFile) throws IOException;
     List<ImageDTO> getAllBySportFieldId(String sportFieldId);
+    ImageDTO getBySportFieldIdAndImageName(String sportFieldId, String imageName);
     void delete(String sportFieldId, String imageName) throws IOException;
 }

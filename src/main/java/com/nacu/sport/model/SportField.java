@@ -23,4 +23,5 @@ public class SportField
     private Address address;
     private Double rating;
     private Schedule schedule;
+    private String primaryImageName;
 }

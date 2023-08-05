@@ -13,5 +13,4 @@ public class ImageDTO
 {
     private String name;
     private byte[] byteArray;
-    private boolean isPrimary;
 }

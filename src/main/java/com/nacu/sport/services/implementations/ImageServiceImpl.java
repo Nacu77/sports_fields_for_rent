@@ -39,7 +39,6 @@ public class ImageServiceImpl implements ImageService
         ImageDTO image = ImageDTO.builder()
                 .name(imageName)
                 .byteArray(imageFile.getBytes())
-                .isPrimary(false)
                 .build();
         imageFile.transferTo(new File(pathToSave));
 
@@ -64,7 +63,6 @@ public class ImageServiceImpl implements ImageService
                                 return ImageDTO.builder()
                                         .name(path.getFileName().toString())
                                         .byteArray(Files.readAllBytes(path))
-                                        .isPrimary(false)
                                         .build();
                             }
                             catch (IOException e)
@@ -83,6 +81,23 @@ public class ImageServiceImpl implements ImageService
         }
 
         return images;
+    }
+
+    @Override
+    public ImageDTO getBySportFieldIdAndImageName(String sportFieldId, String imageName)
+    {
+        Path imagePath = Paths.get(IMAGES_DIRECTORY_PATH + sportFieldId + "\\" + imageName);
+        try
+        {
+            return ImageDTO.builder()
+                    .name(imageName)
+                    .byteArray(Files.readAllBytes(imagePath))
+                    .build();
+        } catch (IOException e)
+        {
+            log.error("Error while getting images from: " + imagePath, e);
+            return null;
+        }
     }
 
     @Override
