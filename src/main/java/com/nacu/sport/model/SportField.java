@@ -17,6 +17,7 @@ public class SportField
     @Id
     private String id;
 
+    private String createdBy;
     private String name;
     private String description;
     private Double pricePerHour;

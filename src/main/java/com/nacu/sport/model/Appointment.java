@@ -24,6 +24,8 @@ public class Appointment
 
     private String sportFieldId;
 
+    private String createdBy;
+
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
     private LocalDateTime startDateTime;
 

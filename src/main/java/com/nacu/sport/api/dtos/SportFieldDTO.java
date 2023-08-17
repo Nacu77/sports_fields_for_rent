@@ -19,6 +19,9 @@ public class SportFieldDTO
 {
     private String id;
 
+    @NotNull(message = "Created By is null")
+    private String createdBy;
+
     @NotBlank(message = "Empty name")
     @NotNull(message = "Name is null")
     private String name;

@@ -24,6 +24,9 @@ public class AppointmentDTO
     @NotNull(message = "Sport field id is null")
     private String sportFieldId;
 
+    @NotNull(message = "Created By is null")
+    private String createdBy;
+
     @NotNull(message = "Start date is null")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime startDateTime;

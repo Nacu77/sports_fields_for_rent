@@ -16,4 +16,13 @@ public class UserServiceImpl extends CrudServiceImpl<UserDTO, User> implements U
     {
         super(repository, mapper);
     }
+
+    @Override
+    public UserDTO getProfile(String id)
+    {
+        UserDTO userDTO = findById(id);
+        userDTO.setPassword(null);
+        userDTO.setRole(null);
+        return userDTO;
+    }
 }
