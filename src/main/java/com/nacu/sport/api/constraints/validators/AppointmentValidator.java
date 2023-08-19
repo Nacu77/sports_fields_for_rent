@@ -75,7 +75,8 @@ public class AppointmentValidator implements ConstraintValidator<AppointmentVali
                 .stream()
                 .anyMatch(appointment ->
                         (startDate.isAfter(appointment.getStartDateTime()) && startDate.isBefore(appointment.getEndDateTime())) ||
-                        (endDate.isAfter(appointment.getStartDateTime()) && endDate.isBefore(appointment.getEndDateTime()))
+                        (endDate.isAfter(appointment.getStartDateTime()) && endDate.isBefore(appointment.getEndDateTime())) ||
+                        (startDate.isBefore(appointment.getStartDateTime()) && endDate.isAfter(appointment.getEndDateTime()))
                 );
 
         return !overlapsOtherAppointment;
