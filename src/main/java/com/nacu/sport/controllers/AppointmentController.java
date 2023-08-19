@@ -2,15 +2,13 @@ package com.nacu.sport.controllers;
 
 import com.nacu.sport.api.dtos.AppointmentDTO;
 import com.nacu.sport.api.requests.GetAppointmentsForSpecificDateRequest;
+import com.nacu.sport.api.requests.GetAppointmentsForSpecificUserRequest;
 import com.nacu.sport.services.AppointmentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,9 +25,22 @@ public class AppointmentController
         return new ResponseEntity<>(service.create(appointmentDTO), HttpStatus.CREATED);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id)
+    {
+        service.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping(value = "/get-appointments-for-specific-date")
     public ResponseEntity<List<AppointmentDTO>> getAppointmentsForSpecificDate(@RequestBody GetAppointmentsForSpecificDateRequest request)
     {
         return new ResponseEntity<>(service.getAppointmentsForSpecificDate(request), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/get-appointments-for-specific-user")
+    public ResponseEntity<List<AppointmentDTO>> getAppointmentsForSpecificUser(@RequestBody GetAppointmentsForSpecificUserRequest request)
+    {
+        return new ResponseEntity<>(service.getAppointmentsForSpecificUser(request), HttpStatus.OK);
     }
 }

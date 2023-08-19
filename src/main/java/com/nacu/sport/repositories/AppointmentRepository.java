@@ -11,4 +11,6 @@ import java.util.List;
 public interface AppointmentRepository extends ElasticsearchRepository<Appointment, String>
 {
     List<Appointment> findAllBySportFieldIdAndStartDateTimeGreaterThanEqualAndEndDateTimeLessThanEqual(String sportFieldId, LocalDateTime startDate, LocalDateTime endDate);
+    List<Appointment> findAllByCreatedByAndEndDateTimeGreaterThan(String createdBy, LocalDateTime endDate);
+    List<Appointment> findAllByCreatedByAndEndDateTimeLessThan(String createdBy, LocalDateTime endDate);
 }
