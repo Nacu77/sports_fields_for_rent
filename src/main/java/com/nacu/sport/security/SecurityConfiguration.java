@@ -9,6 +9,7 @@ import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -65,7 +66,9 @@ public class SecurityConfiguration
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/**", "/error/**").permitAll()
+                        .requestMatchers("/api/auth/login", "/api/auth/register", "/error/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/fields/**", "/api/images/**").permitAll()
+                        .requestMatchers("/api/fields/**", "/api/images/**").hasAnyAuthority(Role.ADMIN.name(), Role.OWNER.name())
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
