@@ -13,4 +13,6 @@ public interface AppointmentRepository extends ElasticsearchRepository<Appointme
     List<Appointment> findAllBySportFieldIdAndStartDateTimeGreaterThanEqualAndEndDateTimeLessThanEqual(String sportFieldId, LocalDateTime startDate, LocalDateTime endDate);
     List<Appointment> findAllByCreatedByAndEndDateTimeGreaterThan(String createdBy, LocalDateTime endDate);
     List<Appointment> findAllByCreatedByAndEndDateTimeLessThan(String createdBy, LocalDateTime endDate);
+    List<Appointment> findAllBySportFieldIdAndEndDateTimeGreaterThan(String sportFieldId, LocalDateTime endDate);
+    List<Appointment> findAllBySportFieldIdAndEndDateTimeLessThan(String sportFieldId, LocalDateTime endDate);
 }

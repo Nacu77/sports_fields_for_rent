@@ -68,7 +68,7 @@ public class SecurityConfiguration
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/api/auth/login", "/api/auth/register", "/error/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/fields/**", "/api/images/**").permitAll()
-                        .requestMatchers("/api/fields/**", "/api/images/**").hasAnyAuthority(Role.ADMIN.name(), Role.OWNER.name())
+                        .requestMatchers("/api/fields/**", "/api/images/**", "/api/appointments/get-appointments-for-specific-field").hasAnyAuthority(Role.ADMIN.name(), Role.OWNER.name())
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)

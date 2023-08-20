@@ -3,6 +3,7 @@ package com.nacu.sport.services.implementations;
 import com.nacu.sport.api.dtos.AppointmentDTO;
 import com.nacu.sport.api.mapper.AppointmentMapper;
 import com.nacu.sport.api.requests.GetAppointmentsForSpecificDateRequest;
+import com.nacu.sport.api.requests.GetAppointmentsForSpecificFieldRequest;
 import com.nacu.sport.api.requests.GetAppointmentsForSpecificUserRequest;
 import com.nacu.sport.model.Appointment;
 import com.nacu.sport.repositories.AppointmentRepository;
@@ -53,6 +54,25 @@ public class AppointmentServiceImpl extends CrudServiceImpl<AppointmentDTO, Appo
         else
         {
             appointments = repository.findAllByCreatedByAndEndDateTimeLessThan(request.getUsername(), LocalDateTime.now());
+        }
+
+        return appointments
+                .parallelStream()
+                .map(mapper::entityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AppointmentDTO> getAppointmentsForSpecificField(GetAppointmentsForSpecificFieldRequest request)
+    {
+        List<Appointment> appointments;
+        if (request.isCurrent())
+        {
+            appointments = repository.findAllBySportFieldIdAndEndDateTimeGreaterThan(request.getSportFieldId(), LocalDateTime.now());
+        }
+        else
+        {
+            appointments = repository.findAllBySportFieldIdAndEndDateTimeLessThan(request.getSportFieldId(), LocalDateTime.now());
         }
 
         return appointments

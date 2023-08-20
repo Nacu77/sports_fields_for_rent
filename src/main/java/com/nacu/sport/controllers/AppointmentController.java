@@ -2,6 +2,7 @@ package com.nacu.sport.controllers;
 
 import com.nacu.sport.api.dtos.AppointmentDTO;
 import com.nacu.sport.api.requests.GetAppointmentsForSpecificDateRequest;
+import com.nacu.sport.api.requests.GetAppointmentsForSpecificFieldRequest;
 import com.nacu.sport.api.requests.GetAppointmentsForSpecificUserRequest;
 import com.nacu.sport.services.AppointmentService;
 import jakarta.validation.Valid;
@@ -42,5 +43,11 @@ public class AppointmentController
     public ResponseEntity<List<AppointmentDTO>> getAppointmentsForSpecificUser(@RequestBody GetAppointmentsForSpecificUserRequest request)
     {
         return new ResponseEntity<>(service.getAppointmentsForSpecificUser(request), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/get-appointments-for-specific-field")
+    public ResponseEntity<List<AppointmentDTO>> getAppointmentsForSpecificField(@RequestBody GetAppointmentsForSpecificFieldRequest request)
+    {
+        return new ResponseEntity<>(service.getAppointmentsForSpecificField(request), HttpStatus.OK);
     }
 }
