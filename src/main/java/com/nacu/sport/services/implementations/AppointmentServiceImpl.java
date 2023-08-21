@@ -80,4 +80,10 @@ public class AppointmentServiceImpl extends CrudServiceImpl<AppointmentDTO, Appo
                 .map(mapper::entityToDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteCurrentAppointmentsForSpecificField(String sportFieldId)
+    {
+        repository.deleteAllBySportFieldIdAndEndDateTimeGreaterThan(sportFieldId, LocalDateTime.now());
+    }
 }

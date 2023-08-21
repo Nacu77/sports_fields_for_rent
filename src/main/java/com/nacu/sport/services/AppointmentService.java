@@ -12,4 +12,5 @@ public interface AppointmentService extends CrudService<AppointmentDTO, String>
     List<AppointmentDTO> getAppointmentsForSpecificDate(GetAppointmentsForSpecificDateRequest request);
     List<AppointmentDTO> getAppointmentsForSpecificUser(GetAppointmentsForSpecificUserRequest request);
     List<AppointmentDTO> getAppointmentsForSpecificField(GetAppointmentsForSpecificFieldRequest request);
+    void deleteCurrentAppointmentsForSpecificField(String sportFieldId);
 }

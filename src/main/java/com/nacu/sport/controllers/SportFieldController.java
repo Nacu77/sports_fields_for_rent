@@ -47,4 +47,10 @@ public class SportFieldController
         service.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping(value = "/specific/{username}")
+    public ResponseEntity<List<SportFieldDTO>> findAllByUser(@PathVariable String username)
+    {
+        return new ResponseEntity<>(service.findAllByUser(username), HttpStatus.OK);
+    }
 }
