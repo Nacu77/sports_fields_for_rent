@@ -2,6 +2,7 @@ package com.nacu.sport.services.implementations;
 
 import com.nacu.sport.api.dtos.AppointmentPostDTO;
 import com.nacu.sport.api.mapper.AppointmentPostMapper;
+import com.nacu.sport.exceptions.AppointmentPostAlreadyExistsException;
 import com.nacu.sport.model.AppointmentPost;
 import com.nacu.sport.repositories.AppointmentPostRepository;
 import com.nacu.sport.services.AppointmentPostService;
@@ -23,6 +24,15 @@ public class AppointmentPostServiceImpl extends CrudServiceImpl<AppointmentPostD
         super(repository, mapper);
         this.repository = repository;
         this.mapper = mapper;
+    }
+
+    @Override
+    public AppointmentPostDTO create(AppointmentPostDTO appointmentPostDTO)
+    {
+        if (repository.findByAppointmentId(appointmentPostDTO.getAppointment().getId()).isPresent()) {
+            throw new AppointmentPostAlreadyExistsException();
+        }
+        return super.create(appointmentPostDTO);
     }
 
     @Override
