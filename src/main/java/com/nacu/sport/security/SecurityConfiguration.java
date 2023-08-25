@@ -67,7 +67,7 @@ public class SecurityConfiguration
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/api/auth/login", "/api/auth/register", "/error/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/fields/**", "/api/images/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/fields/**", "/api/images/**", "api/appointment-posts/").permitAll()
                         .requestMatchers("/api/fields/**", "/api/images/**", "/api/appointments/get-appointments-for-specific-field").hasAnyAuthority(Role.ADMIN.name(), Role.OWNER.name())
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())

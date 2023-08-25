@@ -23,6 +23,12 @@ public class AppointmentPostController
         return new ResponseEntity<>(service.create(appointmentPostDTO), HttpStatus.CREATED);
     }
 
+    @GetMapping(value = "/")
+    public ResponseEntity<List<AppointmentPostDTO>> findAll()
+    {
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+    }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id)
     {

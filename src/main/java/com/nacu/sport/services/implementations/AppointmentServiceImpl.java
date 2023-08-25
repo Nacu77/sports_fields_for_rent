@@ -7,6 +7,7 @@ import com.nacu.sport.api.requests.GetAppointmentsForSpecificFieldRequest;
 import com.nacu.sport.api.requests.GetAppointmentsForSpecificUserRequest;
 import com.nacu.sport.model.Appointment;
 import com.nacu.sport.repositories.AppointmentRepository;
+import com.nacu.sport.services.AppointmentPostService;
 import com.nacu.sport.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,22 @@ public class AppointmentServiceImpl extends CrudServiceImpl<AppointmentDTO, Appo
     private final AppointmentRepository repository;
     private final AppointmentMapper mapper;
 
+    private final AppointmentPostService appointmentPostService;
+
     @Autowired
-    public AppointmentServiceImpl(AppointmentRepository repository, AppointmentMapper mapper)
+    public AppointmentServiceImpl(AppointmentRepository repository, AppointmentMapper mapper, AppointmentPostService appointmentPostService)
     {
         super(repository, mapper);
         this.repository = repository;
         this.mapper = mapper;
+        this.appointmentPostService = appointmentPostService;
+    }
+
+    @Override
+    public void deleteById(String id)
+    {
+        super.deleteById(id);
+        appointmentPostService.deleteByAppointmentId(id);
     }
 
     @Override

@@ -7,4 +7,5 @@ import java.util.List;
 public interface AppointmentPostService extends CrudService<AppointmentPostDTO, String>
 {
     List<AppointmentPostDTO> getAppointmentPostsForSpecificUser(String username);
+    void deleteByAppointmentId(String appointmentId);
 }

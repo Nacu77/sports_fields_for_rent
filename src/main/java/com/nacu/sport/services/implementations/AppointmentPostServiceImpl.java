@@ -43,4 +43,10 @@ public class AppointmentPostServiceImpl extends CrudServiceImpl<AppointmentPostD
                 .map(mapper::entityToDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteByAppointmentId(String appointmentId)
+    {
+        repository.findByAppointmentId(appointmentId).ifPresent(repository::delete);
+    }
 }

@@ -1,6 +1,5 @@
 package com.nacu.sport.repositories;
 
-import com.nacu.sport.api.dtos.AppointmentDTO;
 import com.nacu.sport.model.AppointmentPost;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
@@ -24,5 +23,5 @@ public interface AppointmentPostRepository extends ElasticsearchRepository<Appoi
             "[{\"match\": " +
             "{\"appointment.id\": \"?0\"" +
             "}}]}}")
-    Optional<AppointmentDTO> findByAppointmentId(String appointmentId);
+    Optional<AppointmentPost> findByAppointmentId(String appointmentId);
 }
