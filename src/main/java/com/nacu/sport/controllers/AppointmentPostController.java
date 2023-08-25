@@ -29,6 +29,12 @@ public class AppointmentPostController
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
+    @PutMapping(value = "/")
+    public ResponseEntity<AppointmentPostDTO> update(@RequestBody @Valid AppointmentPostDTO appointmentPostDTO)
+    {
+        return new ResponseEntity<>(service.update(appointmentPostDTO), HttpStatus.OK);
+    }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id)
     {

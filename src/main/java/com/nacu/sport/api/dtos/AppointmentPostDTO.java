@@ -1,5 +1,6 @@
 package com.nacu.sport.api.dtos;
 
+import com.nacu.sport.api.constraints.validations.AppointmentPostValidation;
 import com.nacu.sport.model.Appointment;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -10,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@AppointmentPostValidation
 public class AppointmentPostDTO
 {
     private String id;
