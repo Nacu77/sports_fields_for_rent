@@ -34,4 +34,6 @@ public class AppointmentDTO
     @NotNull(message = "End date is null")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime endDateTime;
+
+    private String sportFieldName;
 }

@@ -1,9 +1,11 @@
 package com.nacu.sport.api.dtos;
 
 import com.nacu.sport.api.constraints.validations.AppointmentPostValidation;
-import com.nacu.sport.model.Appointment;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class AppointmentPostDTO
     private String id;
 
     @NotNull(message = "Appointment is null")
-    private Appointment appointment;
+    private AppointmentDTO appointment;
 
     @NotNull(message = "Slots is null")
     private int slots;
