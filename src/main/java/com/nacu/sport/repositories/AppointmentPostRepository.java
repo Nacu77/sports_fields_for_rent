@@ -24,4 +24,11 @@ public interface AppointmentPostRepository extends ElasticsearchRepository<Appoi
             "{\"appointment.id\": \"?0\"" +
             "}}]}}")
     Optional<AppointmentPost> findByAppointmentId(String appointmentId);
+
+    @Query("{\"bool\": " +
+            "{\"must\": " +
+            "[{\"match\": " +
+            "{\"applicants\": \"?0\"" +
+            "}}]}}")
+    List<AppointmentPost> findAllByUsernameInApplicants(String username);
 }

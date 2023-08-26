@@ -45,6 +45,15 @@ public class AppointmentPostServiceImpl extends CrudServiceImpl<AppointmentPostD
     }
 
     @Override
+    public List<AppointmentPostDTO> getAppliedAppointmentPostsForSpecificUser(String username)
+    {
+        return repository.findAllByUsernameInApplicants(username)
+                .parallelStream()
+                .map(mapper::entityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void deleteByAppointmentId(String appointmentId)
     {
         repository.findByAppointmentId(appointmentId).ifPresent(repository::delete);

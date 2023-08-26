@@ -47,4 +47,10 @@ public class AppointmentPostController
     {
         return new ResponseEntity<>(service.getAppointmentPostsForSpecificUser(username), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/get-applied-appointment-posts-for-specific-user/{username}")
+    public ResponseEntity<List<AppointmentPostDTO>> getAppliedAppointmentPostsForSpecificUser(@PathVariable String username)
+    {
+        return new ResponseEntity<>(service.getAppliedAppointmentPostsForSpecificUser(username), HttpStatus.OK);
+    }
 }
