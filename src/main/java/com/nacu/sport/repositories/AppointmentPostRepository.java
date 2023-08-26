@@ -11,24 +11,36 @@ import java.util.Optional;
 @Repository
 public interface AppointmentPostRepository extends ElasticsearchRepository<AppointmentPost, String>
 {
-    @Query("{\"bool\": " +
-            "{\"must\": " +
-            "[{\"match\": " +
-            "{\"appointment.createdBy\": \"?0\"" +
-            "}}]}}")
+    @Query("""
+            {
+                "bool": {
+                    "must": [{
+                        "match": { "appointment.createdBy": "?0" }
+                    }]
+                }
+            }
+            """)
     List<AppointmentPost> findAllByUsername(String username);
 
-    @Query("{\"bool\": " +
-            "{\"must\": " +
-            "[{\"match\": " +
-            "{\"appointment.id\": \"?0\"" +
-            "}}]}}")
+    @Query("""
+            {
+                "bool": {
+                    "must": [{
+                        "match": { "appointment.id": "?0" }
+                    }]
+                }
+            }
+            """)
     Optional<AppointmentPost> findByAppointmentId(String appointmentId);
 
-    @Query("{\"bool\": " +
-            "{\"must\": " +
-            "[{\"match\": " +
-            "{\"applicants\": \"?0\"" +
-            "}}]}}")
+    @Query("""
+            {
+                "bool": {
+                    "must": [{
+                        "match": { "applicants": "?0" }
+                    }]
+                }
+            }
+            """)
     List<AppointmentPost> findAllByUsernameInApplicants(String username);
 }

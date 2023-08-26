@@ -2,6 +2,7 @@ package com.nacu.sport.services.implementations;
 
 import com.nacu.sport.api.dtos.SportFieldDTO;
 import com.nacu.sport.api.mapper.SportFieldMapper;
+import com.nacu.sport.api.requests.GetFilteredFieldsRequest;
 import com.nacu.sport.model.SportField;
 import com.nacu.sport.repositories.SportFieldRepository;
 import com.nacu.sport.services.AppointmentService;
@@ -40,6 +41,19 @@ public class SportFieldServiceImpl extends CrudServiceImpl<SportFieldDTO, SportF
     public List<SportFieldDTO> findAllByUser(String username)
     {
         return repository.findAllByCreatedBy(username)
+                .parallelStream()
+                .map(mapper::entityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SportFieldDTO> getFilteredFields(GetFilteredFieldsRequest getFilteredFieldsRequest)
+    {
+        return repository.findAllFiltered(getFilteredFieldsRequest.getMinPrice() != null ? getFilteredFieldsRequest.getMinPrice() : 0d,
+                                          getFilteredFieldsRequest.getMaxPrice() != null ? getFilteredFieldsRequest.getMaxPrice() : 100000000d,
+                                          getFilteredFieldsRequest.getCountry() != null ? getFilteredFieldsRequest.getCountry() : "*",
+                                          getFilteredFieldsRequest.getCity() != null ? getFilteredFieldsRequest.getCity() : "*",
+                                          getFilteredFieldsRequest.getName() != null ? getFilteredFieldsRequest.getName(): "*")
                 .parallelStream()
                 .map(mapper::entityToDto)
                 .collect(Collectors.toList());

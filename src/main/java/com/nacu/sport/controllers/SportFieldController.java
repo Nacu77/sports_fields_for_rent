@@ -1,6 +1,7 @@
 package com.nacu.sport.controllers;
 
 import com.nacu.sport.api.dtos.SportFieldDTO;
+import com.nacu.sport.api.requests.GetFilteredFieldsRequest;
 import com.nacu.sport.services.SportFieldService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,11 @@ public class SportFieldController
     public ResponseEntity<List<SportFieldDTO>> findAllByUser(@PathVariable String username)
     {
         return new ResponseEntity<>(service.findAllByUser(username), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/get-filtered-fields")
+    public ResponseEntity<List<SportFieldDTO>> getFilteredFields(@RequestBody @Valid GetFilteredFieldsRequest getFilteredFieldsRequest)
+    {
+        return new ResponseEntity<>(service.getFilteredFields(getFilteredFieldsRequest), HttpStatus.OK);
     }
 }
