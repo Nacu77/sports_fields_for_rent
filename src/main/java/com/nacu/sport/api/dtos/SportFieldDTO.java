@@ -1,6 +1,7 @@
 package com.nacu.sport.api.dtos;
 
 import com.nacu.sport.api.constraints.validations.ScheduleValidation;
+import com.nacu.sport.model.SportFieldType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -44,4 +45,7 @@ public class SportFieldDTO
 
     private String primaryImageName;
     private ImageDTO primaryImage;
+
+    @NotNull(message = "Sport field type is null")
+    private SportFieldType type;
 }

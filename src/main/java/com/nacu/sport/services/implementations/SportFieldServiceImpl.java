@@ -53,7 +53,8 @@ public class SportFieldServiceImpl extends CrudServiceImpl<SportFieldDTO, SportF
                                           getFilteredFieldsRequest.getMaxPrice() != null ? getFilteredFieldsRequest.getMaxPrice() : 100000000d,
                                           getFilteredFieldsRequest.getCountry() != null ? getFilteredFieldsRequest.getCountry() : "*",
                                           getFilteredFieldsRequest.getCity() != null ? getFilteredFieldsRequest.getCity() : "*",
-                                          getFilteredFieldsRequest.getName() != null ? getFilteredFieldsRequest.getName(): "*")
+                                          getFilteredFieldsRequest.getName() != null ? getFilteredFieldsRequest.getName(): "*",
+                                          getFilteredFieldsRequest.getType() != null ? getFilteredFieldsRequest.getType(): "*")
                 .parallelStream()
                 .map(mapper::entityToDto)
                 .collect(Collectors.toList());

@@ -30,4 +30,5 @@ public class SportField
     private Double rating;
     private Schedule schedule;
     private String primaryImageName;
+    private SportFieldType type;
 }

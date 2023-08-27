@@ -19,10 +19,11 @@ public interface SportFieldRepository extends ElasticsearchRepository<SportField
                         { "range": { "pricePerHour": {"gte": "?0", "lte": "?1"} }},
                         { "wildcard": { "address.country": { "value" : "?2", "case_insensitive" : "true" } }},
                         { "wildcard": { "address.city": { "value" : "?3", "case_insensitive" : "true" } }},
-                        { "wildcard": { "name": { "value" : "?4", "case_insensitive" : "true" } }}
+                        { "wildcard": { "name": { "value" : "?4", "case_insensitive" : "true" } }},
+                        { "wildcard": { "type": { "value" : "?5", "case_insensitive" : "true" } }}
                     ]
                 }
             }
             """)
-    List<SportField> findAllFiltered(Double minPrice, Double maxPrice, String country, String city, String name);
+    List<SportField> findAllFiltered(Double minPrice, Double maxPrice, String country, String city, String name, String type);
 }
