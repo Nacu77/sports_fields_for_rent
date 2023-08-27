@@ -48,7 +48,7 @@ public class AppointmentServiceImpl extends CrudServiceImpl<AppointmentDTO, Appo
         LocalDateTime endDate = request.getDate().atTime(LocalTime.MAX);
         String sportFieldId = request.getSportFieldId();
 
-        return repository.findAllBySportFieldIdAndStartDateTimeGreaterThanEqualAndEndDateTimeLessThanEqual(sportFieldId, startDate, endDate)
+        return repository.findAllBySportFieldIdAndStartDateTimeGreaterThanEqualAndEndDateTimeLessThanEqualOrderByStartDateTimeAsc(sportFieldId, startDate, endDate)
                 .parallelStream()
                 .map(mapper::entityToDto)
                 .collect(Collectors.toList());

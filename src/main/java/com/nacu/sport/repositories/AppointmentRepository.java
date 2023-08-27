@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface AppointmentRepository extends ElasticsearchRepository<Appointment, String>
 {
-    List<Appointment> findAllBySportFieldIdAndStartDateTimeGreaterThanEqualAndEndDateTimeLessThanEqual(String sportFieldId, LocalDateTime startDate, LocalDateTime endDate);
+    List<Appointment> findAllBySportFieldIdAndStartDateTimeGreaterThanEqualAndEndDateTimeLessThanEqualOrderByStartDateTimeAsc(String sportFieldId, LocalDateTime startDate, LocalDateTime endDate);
     List<Appointment> findAllByCreatedByAndEndDateTimeGreaterThan(String createdBy, LocalDateTime endDate);
     List<Appointment> findAllByCreatedByAndEndDateTimeLessThan(String createdBy, LocalDateTime endDate);
     List<Appointment> findAllBySportFieldIdAndEndDateTimeGreaterThan(String sportFieldId, LocalDateTime endDate);

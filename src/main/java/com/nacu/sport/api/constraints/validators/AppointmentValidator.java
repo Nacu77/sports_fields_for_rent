@@ -67,7 +67,7 @@ public class AppointmentValidator implements ConstraintValidator<AppointmentVali
 
         // check if the time overlaps other appointments
         boolean overlapsOtherAppointment = appointmentRepository
-                .findAllBySportFieldIdAndStartDateTimeGreaterThanEqualAndEndDateTimeLessThanEqual(
+                .findAllBySportFieldIdAndStartDateTimeGreaterThanEqualAndEndDateTimeLessThanEqualOrderByStartDateTimeAsc(
                     appointmentDTO.getSportFieldId(),
                     startDate.toLocalDate().atStartOfDay(),
                     endDate.toLocalDate().atTime(LocalTime.MAX)
