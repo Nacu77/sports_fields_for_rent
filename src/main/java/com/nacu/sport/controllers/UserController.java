@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
@@ -23,9 +22,6 @@ public class UserController
 {
     @Autowired
     private JwtEncoder jwtEncoder;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserService userService;
@@ -51,8 +47,6 @@ public class UserController
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody @Valid UserDTO userDTO)
     {
-        String hashedPassword = passwordEncoder.encode(userDTO.getPassword());
-        userDTO.setPassword(hashedPassword);
         userService.create(userDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -61,5 +55,11 @@ public class UserController
     public ResponseEntity<UserDTO> getProfile(@PathVariable String id)
     {
         return new ResponseEntity<>(userService.getProfile(id), HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/")
+    public ResponseEntity<UserDTO> updateProfile(@RequestBody @Valid UserDTO userDTO)
+    {
+        return new ResponseEntity<>(userService.update(userDTO), HttpStatus.OK);
     }
 }
