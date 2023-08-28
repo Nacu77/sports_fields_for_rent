@@ -60,11 +60,11 @@ public class AppointmentServiceImpl extends CrudServiceImpl<AppointmentDTO, Appo
         List<Appointment> appointments;
         if (request.isCurrent())
         {
-            appointments = repository.findAllByCreatedByAndEndDateTimeGreaterThan(request.getUsername(), LocalDateTime.now());
+            appointments = repository.findAllByCreatedByAndEndDateTimeGreaterThanOrderByStartDateTimeAsc(request.getUsername(), LocalDateTime.now());
         }
         else
         {
-            appointments = repository.findAllByCreatedByAndEndDateTimeLessThan(request.getUsername(), LocalDateTime.now());
+            appointments = repository.findAllByCreatedByAndEndDateTimeLessThanOrderByStartDateTimeAsc(request.getUsername(), LocalDateTime.now());
         }
 
         return appointments
@@ -79,11 +79,11 @@ public class AppointmentServiceImpl extends CrudServiceImpl<AppointmentDTO, Appo
         List<Appointment> appointments;
         if (request.isCurrent())
         {
-            appointments = repository.findAllBySportFieldIdAndEndDateTimeGreaterThan(request.getSportFieldId(), LocalDateTime.now());
+            appointments = repository.findAllBySportFieldIdAndEndDateTimeGreaterThanOrderByStartDateTimeAsc(request.getSportFieldId(), LocalDateTime.now());
         }
         else
         {
-            appointments = repository.findAllBySportFieldIdAndEndDateTimeLessThan(request.getSportFieldId(), LocalDateTime.now());
+            appointments = repository.findAllBySportFieldIdAndEndDateTimeLessThanOrderByStartDateTimeAsc(request.getSportFieldId(), LocalDateTime.now());
         }
 
         return appointments

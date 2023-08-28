@@ -1,6 +1,7 @@
 package com.nacu.sport.repositories;
 
 import com.nacu.sport.model.AppointmentPost;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
@@ -20,7 +21,18 @@ public interface AppointmentPostRepository extends ElasticsearchRepository<Appoi
                 }
             }
             """)
-    List<AppointmentPost> findAllByUsername(String username);
+    List<AppointmentPost> findAllByUsername(String username, Sort sort);
+
+    @Query("""
+            {
+                "bool": {
+                    "must": [{
+                        "match": { "applicants": "?0" }
+                    }]
+                }
+            }
+            """)
+    List<AppointmentPost> findAllByUsernameInApplicants(String username, Sort sort);
 
     @Query("""
             {
@@ -32,15 +44,4 @@ public interface AppointmentPostRepository extends ElasticsearchRepository<Appoi
             }
             """)
     Optional<AppointmentPost> findByAppointmentId(String appointmentId);
-
-    @Query("""
-            {
-                "bool": {
-                    "must": [{
-                        "match": { "applicants": "?0" }
-                    }]
-                }
-            }
-            """)
-    List<AppointmentPost> findAllByUsernameInApplicants(String username);
 }

@@ -7,10 +7,12 @@ import com.nacu.sport.model.AppointmentPost;
 import com.nacu.sport.repositories.AppointmentPostRepository;
 import com.nacu.sport.services.AppointmentPostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class AppointmentPostServiceImpl extends CrudServiceImpl<AppointmentPostDTO, AppointmentPost> implements AppointmentPostService
@@ -36,9 +38,18 @@ public class AppointmentPostServiceImpl extends CrudServiceImpl<AppointmentPostD
     }
 
     @Override
+    public List<AppointmentPostDTO> getAllAppointmentPostsWithFreeSlots()
+    {
+        return StreamSupport.stream(repository.findAll(Sort.by(Sort.Order.asc("appointment.startDateTime"))).spliterator(), true)
+                .filter(appointmentPost -> appointmentPost.getSlots() > appointmentPost.getApplicants().size())
+                .map(mapper::entityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<AppointmentPostDTO> getAppointmentPostsForSpecificUser(String username)
     {
-        return repository.findAllByUsername(username)
+        return repository.findAllByUsername(username, Sort.by(Sort.Order.asc("appointment.startDateTime")))
                 .parallelStream()
                 .map(mapper::entityToDto)
                 .collect(Collectors.toList());
@@ -47,7 +58,7 @@ public class AppointmentPostServiceImpl extends CrudServiceImpl<AppointmentPostD
     @Override
     public List<AppointmentPostDTO> getAppliedAppointmentPostsForSpecificUser(String username)
     {
-        return repository.findAllByUsernameInApplicants(username)
+        return repository.findAllByUsernameInApplicants(username, Sort.by(Sort.Order.asc("appointment.startDateTime")))
                 .parallelStream()
                 .map(mapper::entityToDto)
                 .collect(Collectors.toList());

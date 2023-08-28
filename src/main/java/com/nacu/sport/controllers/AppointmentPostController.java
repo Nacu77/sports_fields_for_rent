@@ -23,12 +23,6 @@ public class AppointmentPostController
         return new ResponseEntity<>(service.create(appointmentPostDTO), HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/")
-    public ResponseEntity<List<AppointmentPostDTO>> findAll()
-    {
-        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
-    }
-
     @PutMapping(value = "/")
     public ResponseEntity<AppointmentPostDTO> update(@RequestBody @Valid AppointmentPostDTO appointmentPostDTO)
     {
@@ -40,6 +34,12 @@ public class AppointmentPostController
     {
         service.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/get-all-appointment-posts-with-free-slots")
+    public ResponseEntity<List<AppointmentPostDTO>> getAllAppointmentPostsWithFreeSlots()
+    {
+        return new ResponseEntity<>(service.getAllAppointmentPostsWithFreeSlots(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/get-appointment-posts-for-specific-user/{username}")

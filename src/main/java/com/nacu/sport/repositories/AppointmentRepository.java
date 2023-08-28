@@ -11,9 +11,9 @@ import java.util.List;
 public interface AppointmentRepository extends ElasticsearchRepository<Appointment, String>
 {
     List<Appointment> findAllBySportFieldIdAndStartDateTimeGreaterThanEqualAndEndDateTimeLessThanEqualOrderByStartDateTimeAsc(String sportFieldId, LocalDateTime startDate, LocalDateTime endDate);
-    List<Appointment> findAllByCreatedByAndEndDateTimeGreaterThan(String createdBy, LocalDateTime endDate);
-    List<Appointment> findAllByCreatedByAndEndDateTimeLessThan(String createdBy, LocalDateTime endDate);
-    List<Appointment> findAllBySportFieldIdAndEndDateTimeGreaterThan(String sportFieldId, LocalDateTime endDate);
-    List<Appointment> findAllBySportFieldIdAndEndDateTimeLessThan(String sportFieldId, LocalDateTime endDate);
+    List<Appointment> findAllByCreatedByAndEndDateTimeGreaterThanOrderByStartDateTimeAsc(String createdBy, LocalDateTime endDate);
+    List<Appointment> findAllByCreatedByAndEndDateTimeLessThanOrderByStartDateTimeAsc(String createdBy, LocalDateTime endDate);
+    List<Appointment> findAllBySportFieldIdAndEndDateTimeGreaterThanOrderByStartDateTimeAsc(String sportFieldId, LocalDateTime endDate);
+    List<Appointment> findAllBySportFieldIdAndEndDateTimeLessThanOrderByStartDateTimeAsc(String sportFieldId, LocalDateTime endDate);
     void deleteAllBySportFieldIdAndEndDateTimeGreaterThan(String sportFieldId, LocalDateTime endDate);
 }
