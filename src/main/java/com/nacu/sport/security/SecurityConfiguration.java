@@ -66,7 +66,7 @@ public class SecurityConfiguration
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/auth/login", "/api/auth/register", "/error/**", "/swagger-ui/**")
+                        .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/reset-password", "/error/**", "/swagger-ui/**")
                         .permitAll()
                         .requestMatchers(HttpMethod.GET,
                                 "/api/fields/**", "/api/images/**", "api/appointment-posts/get-all-appointment-posts-with-free-slots")
