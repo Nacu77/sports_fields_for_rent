@@ -66,10 +66,15 @@ public class SecurityConfiguration
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/api/auth/login", "/api/auth/register", "/error/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/fields/**", "/api/images/**", "api/appointment-posts/").permitAll()
-                        .requestMatchers("/api/fields/get-filtered-fields").permitAll()
-                        .requestMatchers("/api/fields/**", "/api/images/**", "/api/appointments/get-appointments-for-specific-field").hasAnyAuthority(Role.ADMIN.name(), Role.OWNER.name())
+                        .requestMatchers("/api/auth/login", "/api/auth/register", "/error/**", "/swagger-ui/**")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/fields/**", "/api/images/**", "api/appointment-posts/get-all-appointment-posts-with-free-slots")
+                        .permitAll()
+                        .requestMatchers("/api/fields/get-filtered-fields", "api/appointment-posts/get-filtered-appointment-posts-with-free-slots")
+                        .permitAll()
+                        .requestMatchers("/api/fields/**", "/api/images/**", "/api/appointments/get-appointments-for-specific-field")
+                        .hasAnyAuthority(Role.ADMIN.name(), Role.OWNER.name())
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)

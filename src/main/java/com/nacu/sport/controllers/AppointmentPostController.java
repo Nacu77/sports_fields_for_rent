@@ -1,6 +1,7 @@
 package com.nacu.sport.controllers;
 
 import com.nacu.sport.api.dtos.AppointmentPostDTO;
+import com.nacu.sport.api.requests.GetFilteredPostsRequest;
 import com.nacu.sport.services.AppointmentPostService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,12 @@ public class AppointmentPostController
     public ResponseEntity<List<AppointmentPostDTO>> getAllAppointmentPostsWithFreeSlots()
     {
         return new ResponseEntity<>(service.getAllAppointmentPostsWithFreeSlots(), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/get-filtered-appointment-posts-with-free-slots")
+    public ResponseEntity<List<AppointmentPostDTO>> getFilteredAppointmentPostsWithFreeSlots(@RequestBody @Valid GetFilteredPostsRequest getFilteredPostsRequest)
+    {
+        return new ResponseEntity<>(service.getFilteredAppointmentPostsWithFreeSlots(getFilteredPostsRequest), HttpStatus.OK);
     }
 
     @GetMapping(value = "/get-appointment-posts-for-specific-user/{username}")

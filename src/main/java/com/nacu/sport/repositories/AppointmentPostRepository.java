@@ -44,4 +44,15 @@ public interface AppointmentPostRepository extends ElasticsearchRepository<Appoi
             }
             """)
     Optional<AppointmentPost> findByAppointmentId(String appointmentId);
+
+    @Query("""
+            {
+                "bool": {
+                    "must": [{
+                        "match": { "appointment.sportFieldId": "?0" }
+                    }]
+                }
+            }
+            """)
+    List<AppointmentPost> findAllBySportFieldId(String sportFieldId);
 }
