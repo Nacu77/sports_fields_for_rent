@@ -41,7 +41,13 @@ public class AppointmentPostServiceImpl extends CrudServiceImpl<AppointmentPostD
     public List<AppointmentPostDTO> getAllAppointmentPostsWithFreeSlots()
     {
         return StreamSupport.stream(repository.findAll(Sort.by(Sort.Order.asc("appointment.startDateTime"))).spliterator(), true)
-                .filter(appointmentPost -> appointmentPost.getSlots() > appointmentPost.getApplicants().size())
+                .filter(appointmentPost -> {
+                    if (appointmentPost.getApplicants() == null)
+                    {
+                        return true;
+                    }
+                    return appointmentPost.getSlots() > appointmentPost.getApplicants().size();
+                })
                 .map(mapper::entityToDto)
                 .collect(Collectors.toList());
     }
