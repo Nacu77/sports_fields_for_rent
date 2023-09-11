@@ -6,6 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,24 +16,37 @@ public interface AppointmentPostRepository extends ElasticsearchRepository<Appoi
     @Query("""
             {
                 "bool": {
-                    "must": [{
-                        "match": { "appointment.createdBy": "?0" }
-                    }]
+                    "must": [
+                        { "range": { "appointment.startDateTime": {"gte": "?0"} }}
+                    ]
                 }
             }
             """)
-    List<AppointmentPost> findAllByUsername(String username, Sort sort);
+    List<AppointmentPost> findAll(LocalDateTime startDateTime, Sort sort);
 
     @Query("""
             {
                 "bool": {
-                    "must": [{
-                        "match": { "applicants": "?0" }
-                    }]
+                    "must": [
+                        { "match": { "appointment.createdBy": "?0" }},
+                        { "range": { "appointment.startDateTime": {"gte": "?1"} }}
+                    ]
                 }
             }
             """)
-    List<AppointmentPost> findAllByUsernameInApplicants(String username, Sort sort);
+    List<AppointmentPost> findAllByUsername(String username, LocalDateTime startDateTime, Sort sort);
+
+    @Query("""
+            {
+                "bool": {
+                    "must": [
+                        { "match": { "applicants": "?0" }},
+                        { "range": { "appointment.startDateTime": {"gte": "?1"} }}
+                    ]
+                }
+            }
+            """)
+    List<AppointmentPost> findAllByUsernameInApplicants(String username, LocalDateTime startDateTime, Sort sort);
 
     @Query("""
             {
@@ -48,11 +62,12 @@ public interface AppointmentPostRepository extends ElasticsearchRepository<Appoi
     @Query("""
             {
                 "bool": {
-                    "must": [{
-                        "match": { "appointment.sportFieldId": "?0" }
-                    }]
+                    "must": [
+                        { "match": { "appointment.sportFieldId": "?0" }},
+                        { "range": { "appointment.startDateTime": {"gte": "?1"} }}
+                    ]
                 }
             }
             """)
-    List<AppointmentPost> findAllBySportFieldId(String sportFieldId);
+    List<AppointmentPost> findAllBySportFieldId(String sportFieldId, LocalDateTime startDateTime);
 }
